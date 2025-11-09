@@ -5,12 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mahmoud & Mayada Wedding Invitation</title>
     
-    <!-- NEW: Favicon link to display the logo in the browser tab -->
-    <link rel="icon" href="https://i.postimg.cc/HxK4cVfK/Group-2.png" type="image/png">
+    <!-- NEW: Favicon link to display the logo in the browser tab --><link rel="icon" href="https://i.postimg.cc/HxK4cVfK/Group-2.png" type="image/png">
+
+    <!-- ------------------------------------------------------------------- --><!-- NEW: Open Graph Meta Tags for WhatsApp/Social Media Sharing --><!-- هذه العلامات تحدد شكل معاينة الرابط عند مشاركته على واتساب وفيسبوك وغيرها --><!-- ------------------------------------------------------------------- --><meta property="og:title" content="دعوة زفاف محمود وميادة">
+    <meta property="og:description" content="نشرف بحضوركم لمشاركتنا فرحة العمر. الجمعة 17 / 07 / 2026.">
+    <meta property="og:image" content="https://i.postimg.cc/DZ3VKwzQ/whatsapp.png">
+    <meta property="og:url" content="[URL_OF_YOUR_WEBSITE]">
+    <meta property="og:type" content="website">
     
     <!-- Load Tailwind CSS --><script src="https://cdn.tailwindcss.com"></script>
-    <!-- UPDATED: Added Outfit and Playfair Display fonts. Removed Cairo/Inter to streamline. -->
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <!-- UPDATED: Added Outfit and Playfair Display fonts. Removed Cairo/Inter to streamline. --><link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
         /* Body font (Used for all text except countdown numbers) */
@@ -30,10 +34,11 @@
             background-image: url('https://i.postimg.cc/Qx8wj5xG/background.png');
             background-size: cover; /* يضمن تغطية الشاشة بالكامل (مهم للتجاوبية) */
             background-position: center; /* يركز الصورة في المنتصف */
-            background-attachment: fixed; /* يجعل الصورة ثابتة أثناء التمرير */
+            /* UPDATED: Removed background-attachment: fixed; for better mobile performance and compatibility */
             position: relative;
         }
-
+        
+        /* تمت إزالة الطبقة السوداء الشفافة (الـ Overlay) بناءً على طلبك
         .background-overlay::before {
             content: '';
             position: absolute;
@@ -41,10 +46,10 @@
             left: 0;
             right: 0;
             bottom: 0;
-            /* Dark overlay layer for text visibility */
             background-color: rgba(0, 0, 0, 0.55); 
             z-index: 1;
         }
+        */
         
         .content {
             z-index: 2;
@@ -54,18 +59,22 @@
         .btn-outline {
             border: 1px solid rgba(255, 255, 255, 0.6);
             border-radius: 9999px; /* Pill shape */
-            transition: all 0.3s ease;
+            /* UPDATED: Changed transition property to include color and background-color for smooth hover effect */
+            transition: all 0.3s ease, color 0.3s ease, background-color 0.3s ease; 
         }
-
+        
+        /* UPDATED: New hover style to achieve white background and black text */
         .btn-outline:hover {
-            background-color: rgba(255, 255, 255, 0.1);
+            background-color: #FFF; /* Background becomes white */
+            color: #000; /* Text becomes black */
+            border-color: #FFF; /* Optional: Make border white too for solid look */
         }
 
         /* Styling for the Logo image (Image of the Caliph) */
         .logo-img {
-            height: 90px; /* Adjust height for large screens */
+            height: 110px; /* UPDATED: Adjust height for large screens (was 90px) */
             width: auto;
-            max-width: 100px;
+            max-width: 120px; /* Adjusted max-width */
             margin: 0 1rem;
             object-fit: contain;
             /* Use a slightly lower opacity if the logo is too bright */
@@ -75,8 +84,8 @@
         /* Responsive adjustment for the logo on smaller screens (Ensures it scales down) */
         @media (max-width: 768px) {
             .logo-img {
-                height: 50px; /* Adjust height for mobile */
-                max-width: 60px;
+                height: 70px; /* UPDATED: Adjust height for mobile (was 50px) */
+                max-width: 80px; /* Adjusted max-width */
                 margin: 0 0.5rem;
             }
         }
@@ -98,8 +107,10 @@
         }
         
         /* Container for the names (MAHMOUD & MAYADA) */
+        /* DEFAULT: Horizontal alignment for desktop/large screens (row) */
         .names-container {
             display: flex;
+            flex-direction: row; /* Default: row */
             align-items: center;
             justify-content: center;
             gap: 4rem; /* Base gap for medium/large screens */
@@ -135,12 +146,27 @@
         /* ------------------------------------------------------------------- */
 
         @media (max-width: 500px) { /* Extra small screens (Android/Mobile) */
-            /* Names and Logo */
+            /* UPDATED: Names to stack vertically on mobile (column) */
             .names-container {
-                gap: 0.5rem; /* Reduce gap between names and logo */
+                flex-direction: column; /* Change to vertical stack */
+                gap: 1rem; /* Adjust gap for vertical stacking */
             }
+            /* To make the logo appear between the names, we wrap the names */
+            .name-wrapper {
+                order: 1; /* Default order for names */
+            }
+            .logo-wrapper {
+                order: 2; /* Logo in the middle */
+            }
+            .name-wrapper.mayada {
+                order: 3; /* Mayada goes last */
+            }
+
+
             .names-container h2 {
                 font-size: 2.5rem; /* Reduced font size for names (e.g., from 5xl) */
+                margin-top: 0; /* Remove top margin */
+                margin-bottom: 0; /* Remove bottom margin */
             }
             
             /* Main Title */
@@ -188,17 +214,21 @@
                 margin: 0 0.5rem;
             }
         }
+        
+        /* التعديلات الجديدة للتابلت (768px وأكبر) لتقليل حجم الخطوط */
         @media (min-width: 768px) { /* md screens and up (Desktop/Large Tablet) */
             .names-container h2 {
-                font-size: 5rem;
+                font-size: 4rem; /* تم التعديل: تقليل حجم الأسماء من 5rem إلى 4rem */
             }
             .countdown-number, .countdown-colon {
-                font-size: 7rem; 
+                font-size: 5.5rem; /* تم التعديل: تقليل حجم العد التنازلي من 7rem إلى 5.5rem */
             }
             .countdown-colon {
                 margin: 0 1rem;
             }
         }
+        
+        /* تم الإبقاء على حجم الخطوط الكبيرة عند 1024px فما فوق لتناسب الشاشات الأكبر */
         @media (min-width: 1024px) { /* lg screens and up (Large Desktop) */
             .names-container h2 {
                 font-size: 7rem;
@@ -216,7 +246,7 @@
 <!-- The body class ensures vertical and horizontal centering of the content area --><body class="background-overlay min-h-screen flex items-center justify-center text-white">
 
     <!-- Custom Message Box (Replaces alert) --><!-- The outer div acts as the full-screen overlay --><div id="message-box" class="hidden fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
-        <!-- Increased max-width for the message box to accommodate the image --><div class="bg-white text-gray-800 p-8 rounded-xl shadow-2xl max-w-lg w-full text-center">
+        <!-- UPDATED: Reduced max-width from max-w-lg to max-w-md --><div class="bg-white text-gray-800 p-8 rounded-xl shadow-2xl max-w-md w-full text-center">
             <h3 id="message-title" class="text-2xl font-bold mb-4"></h3>
             <p id="message-body" class="mb-6"></p>
             <button onclick="closeMessageBox()" class="bg-red-500 text-white px-6 py-2 rounded-full hover:bg-red-600 transition">Close</button>
@@ -225,28 +255,30 @@
 
     <!-- Main Content Container: max-w-4xl ensures it's not too wide on large screens, w-full ensures it fills mobile screens. --><div class="content flex flex-col items-center text-center p-6 md:p-10 max-w-4xl w-full mx-auto">
 
-        <!-- Title --><h1 class="text-3xl md:text-5xl tracking-widest mb-16 font-thin font-custom-body text-white">
+        <!-- Title --><!-- تم تعديل حجم التابلت من 5xl إلى 4xl --><h1 class="text-3xl md:text-4xl tracking-widest mb-8 md:mb-12 font-thin font-custom-body text-white">
             Wedding Invitation
         </h1>
 
-        <!-- Names and Logo -->
-        <!-- CHANGED: Added names-container class for better control over responsiveness -->
-        <div class="names-container mb-6"> 
-            <h2 class="text-5xl md:text-7xl font-light tracking-wider font-custom-body text-white">MAHMOUD</h2>
-            <!-- LOGO IMAGE (Replaces Monogram) -->
-            <img src="https://i.postimg.cc/HxK4cVfK/Group-2.png" 
-                 alt="Wedding Logo Monogram" 
-                 class="logo-img"
-                 onerror="this.onerror=null; this.src='https://placehold.co/100x100/3c3c3c/ffffff?text=Logo+Error';">
-            <h2 class="text-5xl md:text-7xl font-light tracking-wider font-custom-body text-white">MAYADA</h2>
+        <!-- Names and Logo --><!-- UPDATED: Uniform spacing mb-8 (2rem) for mobile, md:mb-12 (3rem) for desktop --><div class="names-container mb-8 md:mb-12"> 
+            
+            <!-- MAHMOUD --><div class="name-wrapper">
+                <h2 class="text-5xl md:text-7xl font-light tracking-wider font-custom-body text-white">MAHMOUD</h2>
+            </div>
+
+            <!-- LOGO IMAGE (Wrapper added for ordering on mobile) --><div class="logo-wrapper">
+                <img src="https://i.postimg.cc/HxK4cVfK/Group-2.png" 
+                     alt="Wedding Logo Monogram" 
+                     class="logo-img"
+                     onerror="this.onerror=null; this.src='https://placehold.co/100x100/3c3c3c/ffffff?text=Logo+Error';">
+            </div>
+
+            <!-- MAYADA --><div class="name-wrapper mayada">
+                <h2 class="text-5xl md:text-7xl font-light tracking-wider font-custom-body text-white">MAYADA</h2>
+            </div>
         </div>
 
-        <!-- NEW COUNTDOWN TIMER STRUCTURE -->
-        <!-- The numbers themselves are controlled by the specific media queries in <style> -->
-        <div class="flex justify-center my-10 md:my-12 w-full">
-            <div class="flex items-start"> <!-- Use items-start to align numbers and colons at the top for consistency -->
-                
-                <!-- Days --><div class="flex flex-col items-center countdown-unit">
+        <!-- NEW COUNTDOWN TIMER STRUCTURE --><!-- The numbers themselves are controlled by the specific media queries in <style> --><!-- UPDATED: Uniform spacing mb-8 (2rem) for mobile, md:mb-12 (3rem) for desktop (Replaced my-10 md:my-12) --><div class="flex justify-center mb-8 md:mb-12 w-full">
+            <div class="flex items-start"> <!-- Use items-start to align numbers and colons at the top for consistency --><!-- Days --><div class="flex flex-col items-center countdown-unit">
                     <div id="days" class="countdown-number text-white">00</div>
                     <div class="countdown-label text-white font-custom-body">Day</div>
                 </div>
@@ -271,23 +303,19 @@
             </div>
         </div>
 
-        <!-- Date, Time, and Venue -->
-        <div class="text-2xl md:text-4xl font-light mb-6 font-custom-body text-white">
+        <!-- Date, Time, and Venue --><!-- تم تعديل حجم التابلت من 4xl إلى 3xl --><div class="text-2xl md:text-3xl font-light mb-8 md:mb-12 font-custom-body text-white">
             8:00 PM &middot; 17 / 07 / 2026 &middot; Friday 
         </div>
         
-        <div class="text-lg md:text-xl mb-10 md:mb-16 font-custom-body text-white">
+        <!-- UPDATED: Uniform spacing mb-8 (2rem) for mobile, md:mb-12 (3rem) for desktop (This margin separates the text from the buttons) --><div class="text-lg md:text-xl mb-8 md:mb-12 font-custom-body text-white">
             Damietta - Ras El Bar - El Garbi - Boulevard Hall
         </div>
 
-        <!-- Buttons -->
-        <!-- UPDATED: Added flex-col, space-y-4 for vertical stacking on small screens, and w-full for full-width buttons. -->
-        <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 w-full sm:w-auto">
+        <!-- Buttons --><!-- UPDATED: Added flex-col, space-y-4 for vertical stacking on small screens, and w-full for full-width buttons. --><!-- NOTE: The text-white class on the buttons will be overridden by the .btn-outline:hover style in the CSS when hovered. --><div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 w-full sm:w-auto">
             <button onclick="showFriendsMessage()" class="btn-outline px-6 py-3 text-base md:text-lg font-custom-body hover:scale-105 text-white w-full sm:w-auto">
                 Bride's Friends
             </button>
-            <!-- Location button opens map directly -->
-            <button onclick="openLocation()" class="btn-outline px-6 py-3 text-base md:text-lg font-custom-body hover:scale-105 text-white w-full sm:w-auto">
+            <!-- Location button opens map directly --><button onclick="openLocation()" class="btn-outline px-6 py-3 text-base md:text-lg font-custom-body hover:scale-105 text-white w-full sm:w-auto">
                 Location
             </button>
         </div>
