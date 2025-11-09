@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mahmoud & Mayada Wedding Invitation</title>
+    
+    <!-- NEW: Favicon link to display the logo in the browser tab -->
+    <link rel="icon" href="https://i.postimg.cc/HxK4cVfK/Group-2.png" type="image/png">
+    
+    <!-- Load Tailwind CSS --><script src="https://cdn.tailwindcss.com"></script>
+    <!-- UPDATED: Added Outfit and Playfair Display fonts. Removed Cairo/Inter to streamline. -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Body font (Used for all text except countdown numbers) */
+        /* This acts as a substitute for the requested custom font (SouvenirGotURWTOTRegW03-Rg) */
+        .font-custom-body {
+            font-family: 'Playfair Display', serif; 
+            font-weight: 400; /* Regular weight */
+        }
+        /* Countdown font (Numbers and colons only) */
+        .font-outfit {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        /* Dark background simulation using a reliable, elegant image URL */
+        .background-overlay {
+            /* The image provided by the user. These properties ensure full coverage and responsiveness. */
+            background-image: url('https://i.postimg.cc/Qx8wj5xG/background.png');
+            background-size: cover; /* يضمن تغطية الشاشة بالكامل (مهم للتجاوبية) */
+            background-position: center; /* يركز الصورة في المنتصف */
+            background-attachment: fixed; /* يجعل الصورة ثابتة أثناء التمرير */
+            position: relative;
+        }
+
+        .background-overlay::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            /* Dark overlay layer for text visibility */
+            background-color: rgba(0, 0, 0, 0.55); 
+            z-index: 1;
+        }
+        
+        .content {
+            z-index: 2;
+        }
+
+        /* Outline button style */
+        .btn-outline {
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-radius: 9999px; /* Pill shape */
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Styling for the Logo image (Image of the Caliph) */
+        .logo-img {
+            height: 90px; /* Adjust height for large screens */
+            width: auto;
+            max-width: 100px;
+            margin: 0 1rem;
+            object-fit: contain;
+            /* Use a slightly lower opacity if the logo is too bright */
+            opacity: 0.95; 
+        }
+
+        /* Responsive adjustment for the logo on smaller screens (Ensures it scales down) */
+        @media (max-width: 768px) {
+            .logo-img {
+                height: 50px; /* Adjust height for mobile */
+                max-width: 60px;
+                margin: 0 0.5rem;
+            }
+        }
+        
+        /* Custom styles for the image inside the message box */
+        .message-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px; /* Rounded corners for the image */
+        }
+
+        /* NEW: Custom styles for the countdown units to match the image */
+        .countdown-unit {
+            display: flex;
+            flex-direction: column; /* Ensure number and label stack vertically */
+            align-items: center; 
+            justify-content: center;
+            flex-shrink: 0; /* Prevent shrinking on smaller screens */
+        }
+        
+        /* Container for the names (MAHMOUD & MAYADA) */
+        .names-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4rem; /* Base gap for medium/large screens */
+        }
+
+        .countdown-number {
+            font-size: 5rem; /* Base size for numbers */
+            line-height: 1; 
+            font-weight: 700; 
+            font-family: 'Outfit', sans-serif; 
+        }
+
+        .countdown-colon {
+            font-size: 5rem; 
+            line-height: 1;
+            font-weight: 700;
+            margin: 0 0.5rem; 
+            font-family: 'Outfit', sans-serif; 
+            color: #FFFFFF;
+        }
+
+        .countdown-label {
+            font-size: 0.875rem; 
+            line-height: 1;
+            font-weight: 600; 
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #FFFFFF;
+        }
+
+        /* ------------------------------------------------------------------- */
+        /* CRITICAL RESPONSIVENESS ADJUSTMENTS FOR ANDROID/SMALL PHONES */
+        /* ------------------------------------------------------------------- */
+
+        @media (max-width: 500px) { /* Extra small screens (Android/Mobile) */
+            /* Names and Logo */
+            .names-container {
+                gap: 0.5rem; /* Reduce gap between names and logo */
+            }
+            .names-container h2 {
+                font-size: 2.5rem; /* Reduced font size for names (e.g., from 5xl) */
+            }
+            
+            /* Main Title */
+            .content > .text-3xl { /* Targets "Wedding Invitation" */
+                font-size: 1.5rem; /* Reduced size for the main title */
+            }
+            
+            /* Date and Time */
+            .content > .text-2xl { /* Targets Date & Time */
+                font-size: 1.25rem; /* Reduced size for date/time */
+            }
+            
+            /* Venue Details */
+            .content > .text-lg { /* Targets Venue */
+                font-size: 0.9rem; /* Reduced size for venue */
+            }
+
+            /* Countdown */
+            .countdown-number, .countdown-colon {
+                font-size: 2.5rem; /* Reduced size for numbers */
+            }
+            .countdown-colon {
+                margin: 0 0.15rem; /* Reduced space around colons */
+            }
+            .countdown-unit {
+                margin: 0 0.1rem; /* Reduced space between units */
+            }
+            .countdown-label {
+                font-size: 0.7rem; /* Smaller label */
+            }
+        }
+        
+        /* ------------------------------------------------------------------- */
+        /* STANDARD RESPONSIVENESS ADJUSTMENTS */
+        /* ------------------------------------------------------------------- */
+
+        @media (min-width: 501px) and (max-width: 767px) { /* Small screens (Tablet/Large Mobile) */
+            .names-container h2 {
+                font-size: 3.5rem; 
+            }
+            .countdown-number, .countdown-colon {
+                font-size: 4rem; 
+            }
+            .countdown-colon {
+                margin: 0 0.5rem;
+            }
+        }
+        @media (min-width: 768px) { /* md screens and up (Desktop/Large Tablet) */
+            .names-container h2 {
+                font-size: 5rem;
+            }
+            .countdown-number, .countdown-colon {
+                font-size: 7rem; 
+            }
+            .countdown-colon {
+                margin: 0 1rem;
+            }
+        }
+        @media (min-width: 1024px) { /* lg screens and up (Large Desktop) */
+            .names-container h2 {
+                font-size: 7rem;
+            }
+            .countdown-number, .countdown-colon {
+                font-size: 9rem; 
+            }
+            .countdown-colon {
+                margin: 0 1.5rem;
+            }
+        }
+
+    </style>
+</head>
+<!-- The body class ensures vertical and horizontal centering of the content area --><body class="background-overlay min-h-screen flex items-center justify-center text-white">
+
+    <!-- Custom Message Box (Replaces alert) --><!-- The outer div acts as the full-screen overlay --><div id="message-box" class="hidden fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
+        <!-- Increased max-width for the message box to accommodate the image --><div class="bg-white text-gray-800 p-8 rounded-xl shadow-2xl max-w-lg w-full text-center">
+            <h3 id="message-title" class="text-2xl font-bold mb-4"></h3>
+            <p id="message-body" class="mb-6"></p>
+            <button onclick="closeMessageBox()" class="bg-red-500 text-white px-6 py-2 rounded-full hover:bg-red-600 transition">Close</button>
+        </div>
+    </div>
+
+    <!-- Main Content Container: max-w-4xl ensures it's not too wide on large screens, w-full ensures it fills mobile screens. --><div class="content flex flex-col items-center text-center p-6 md:p-10 max-w-4xl w-full mx-auto">
+
+        <!-- Title --><h1 class="text-3xl md:text-5xl tracking-widest mb-16 font-thin font-custom-body text-white">
+            Wedding Invitation
+        </h1>
+
+        <!-- Names and Logo -->
+        <!-- CHANGED: Added names-container class for better control over responsiveness -->
+        <div class="names-container mb-6"> 
+            <h2 class="text-5xl md:text-7xl font-light tracking-wider font-custom-body text-white">MAHMOUD</h2>
+            <!-- LOGO IMAGE (Replaces Monogram) -->
+            <img src="https://i.postimg.cc/HxK4cVfK/Group-2.png" 
+                 alt="Wedding Logo Monogram" 
+                 class="logo-img"
+                 onerror="this.onerror=null; this.src='https://placehold.co/100x100/3c3c3c/ffffff?text=Logo+Error';">
+            <h2 class="text-5xl md:text-7xl font-light tracking-wider font-custom-body text-white">MAYADA</h2>
+        </div>
+
+        <!-- NEW COUNTDOWN TIMER STRUCTURE -->
+        <!-- The numbers themselves are controlled by the specific media queries in <style> -->
+        <div class="flex justify-center my-10 md:my-12 w-full">
+            <div class="flex items-start"> <!-- Use items-start to align numbers and colons at the top for consistency -->
+                
+                <!-- Days --><div class="flex flex-col items-center countdown-unit">
+                    <div id="days" class="countdown-number text-white">00</div>
+                    <div class="countdown-label text-white font-custom-body">Day</div>
+                </div>
+                <div class="countdown-colon">:</div>
+
+                <!-- Hours --><div class="flex flex-col items-center countdown-unit">
+                    <div id="hours" class="countdown-number text-white">00</div>
+                    <div class="countdown-label text-white font-custom-body">Hour</div>
+                </div>
+                <div class="countdown-colon">:</div>
+
+                <!-- Minutes --><div class="flex flex-col items-center countdown-unit">
+                    <div id="minutes" class="countdown-number text-white">00</div>
+                    <div class="countdown-label text-white font-custom-body">Minute</div>
+                </div>
+                <div class="countdown-colon">:</div>
+
+                <!-- Seconds --><div class="flex flex-col items-center countdown-unit">
+                    <div id="seconds" class="countdown-number text-white">00</div>
+                    <div class="countdown-label text-white font-custom-body">Second</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Date, Time, and Venue -->
+        <div class="text-2xl md:text-4xl font-light mb-6 font-custom-body text-white">
+            8:00 PM &middot; 17 / 07 / 2026 &middot; Friday 
+        </div>
+        
+        <div class="text-lg md:text-xl mb-10 md:mb-16 font-custom-body text-white">
+            Damietta - Ras El Bar - El Garbi - Boulevard Hall
+        </div>
+
+        <!-- Buttons -->
+        <!-- UPDATED: Added flex-col, space-y-4 for vertical stacking on small screens, and w-full for full-width buttons. -->
+        <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 w-full sm:w-auto">
+            <button onclick="showFriendsMessage()" class="btn-outline px-6 py-3 text-base md:text-lg font-custom-body hover:scale-105 text-white w-full sm:w-auto">
+                Bride's Friends
+            </button>
+            <!-- Location button opens map directly -->
+            <button onclick="openLocation()" class="btn-outline px-6 py-3 text-base md:text-lg font-custom-body hover:scale-105 text-white w-full sm:w-auto">
+                Location
+            </button>
+        </div>
+        
+    </div>
+
+    <script>
+        // Function to show a custom message box (replacement for alert)
+        function showMessageBox(title, body) {
+            document.getElementById('message-title').textContent = title;
+            document.getElementById('message-body').innerHTML = body; // Use innerHTML for image/HTML content
+            document.getElementById('message-box').classList.remove('hidden');
+        }
+
+        // Function to close the message box
+        function closeMessageBox() {
+            document.getElementById('message-box').classList.add('hidden');
+        }
+
+        // Function: Displays the image inside the message box
+        function showFriendsMessage() {
+            const imageUrl = 'https://i.postimg.cc/MGCgwFXy/11221.jpg';
+            const imageHtml = `<img src="${imageUrl}" alt="Bride's Friends Invitation Details" class="message-image mx-auto">`;
+            
+            // Set title to an empty string or a relevant title
+            showMessageBox('Special Invitation', imageHtml);
+        }
+
+        // Function to open the Google Maps link directly
+        function openLocation() {
+            // The permanent link to the location on Google Maps
+            const mapLink = "https://maps.app.goo.gl/CgnJsiw5eAmtzBRd8"; 
+            window.open(mapLink, '_blank');
+        }
+
+        // -------------------------------------------------------------------
+        // New functionality: Close modal when clicking the backdrop
+        // -------------------------------------------------------------------
+        window.onload = function() {
+            const messageBox = document.getElementById('message-box');
+            
+            // Add a click listener to the overlay container
+            messageBox.addEventListener('click', function(event) {
+                // Check if the clicked element is the message box container itself (the dark overlay),
+                // and not a child element (the white content card or the image).
+                if (event.target === messageBox) {
+                    closeMessageBox();
+                }
+            });
+            
+            // Run the countdown immediately
+            updateCountdown();
+        }
+
+        // -------------------------------------------------------------------
+        // Countdown Timer Functionality
+        // -------------------------------------------------------------------
+
+        // Set the target date and time to July 17, 2026, 8:00 PM (20:00:00)
+        const targetDate = new Date("2026-07-17T20:00:00").getTime();
+
+        const daysEl = document.getElementById('days');
+        const hoursEl = document.getElementById('hours');
+        const minutesEl = document.getElementById('minutes');
+        const secondsEl = document.getElementById('seconds');
+
+        function updateCountdown() {
+            // Current date and time
+            const now = new Date().getTime();
+            
+            // Difference between target and current time in milliseconds
+            const distance = targetDate - now;
+
+            // Calculate days, hours, minutes, and seconds
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Update elements on the page
+            if (distance > 0) {
+                // Use padStart to ensure two digits (e.g., 05 instead of 5)
+                daysEl.textContent = String(days).padStart(2, '0');
+                hoursEl.textContent = String(hours).padStart(2, '0');
+                minutesEl.textContent = String(minutes).padStart(2, '0');
+                secondsEl.textContent = String(seconds).padStart(2, '0');
+            } else {
+                // If the countdown is over
+                clearInterval(countdownInterval);
+                daysEl.textContent = '00';
+                hoursEl.textContent = '00';
+                minutesEl.textContent = '00';
+                secondsEl.textContent = '00';
+                // You can add a celebration message here
+            }
+        }
+
+        // Update timer every second
+        const countdownInterval = setInterval(updateCountdown, 1000);
+
+    </script>
+</body>
+</html>
